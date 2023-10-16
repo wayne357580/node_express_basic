@@ -2,6 +2,7 @@ const { logger } = require(`${__dirname}/models/logger`)
 
 module.exports = (app) => {
     app.use((req, res, next) => {
+        req.requestTime = Date.now();
         next();
     });
 
@@ -23,14 +24,25 @@ module.exports = (app) => {
         })
     });
 
+    app.get('/fileManager', (req, res) => {
+        return res.sendFile(`${__dirname}/public/html/fileManager.html`);
+    });
+
     app.use('/demo', require(`${__dirname}/api/demo`))
-    app.use('/user', require(`${__dirname}/api/user`))
+    app.use('/hello', require(`${__dirname}/api/hello`))
+    app.use('/file', require(`${__dirname}/api/file`))
 
     app.route('/favicon.ico').get((req, res) => {
         return res.send("")
     });
 
+    // Handle 404 error
     app.use((req, res) => {
         return res.status(404).sendFile(`${__dirname}/public/html/404.html`);
+    });
+    // Handle error
+    app.use((err, req, res, next) => {
+        logger.error(err.stack)
+        return res.status(500).send('Server error');
     });
 }
