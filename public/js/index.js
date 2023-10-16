@@ -16,7 +16,7 @@ userForm.addEventListener('submit', (e) => {
         alert('請輸入性別')
     } else {
         // 送出資料
-        fetch(`/user/${name.value}`, {
+        fetch(`/hello/${name.value}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
