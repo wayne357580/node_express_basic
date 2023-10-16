@@ -36,9 +36,10 @@ A simple nodejs server base on express.
 4. 開啟瀏覽器：http://localhost:8081
 5. 輸入測試資料(name, age, gender)，點擊submit，獲得伺服器回應並使用alert顯示
     * 前端檔案：`public\html\index.html`
-    * 後端檔案：`api\user\controller\get.js`
+    * 後端檔案：`api\hello\controller\get.js`
 ## Other
 * Log 功能模組：`models\logger\index.js`
-* CRUD API 範例：`api\demo\index.js`
-* 接收API範例：`api\user\index.js`
+* 基本 CRUD API 範例：`api\demo\index.js`
+* 接收API範例：`api\hello\index.js` > http://localhost:8081
+* 檔案管理範例：`api\file\index.js` > http://localhost:8081/fileManager
 
