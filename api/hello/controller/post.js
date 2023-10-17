@@ -28,7 +28,7 @@ module.exports = (req, res) => {
         }
     } catch (e) {
         logger.error(`/api/demo/post > ${e}`)
-        return res.status(400).json({
+        return res.status(500).json({
             'status': 'ERROR',
             'message': 'Server error'
         })

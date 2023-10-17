@@ -1,6 +1,6 @@
 const { logger } = require(`../../../models/logger`)
 
-module.exports = (req, res) => {
+module.exports = (req, res) => {    
     try {
         const { name } = req.params
         if (!name) {
@@ -16,7 +16,7 @@ module.exports = (req, res) => {
         }
     } catch (e) {
         logger.error(`/api/demo/get > ${e}`)
-        return res.status(400).json({
+        return res.status(500).json({
             'status': 'ERROR',
             'message': 'Server error'
         })

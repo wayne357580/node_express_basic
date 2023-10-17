@@ -1,3 +1,4 @@
+const { logger } = require(`../../../models/logger`)
 const fs = require('fs')
 const path = require('path')
 
@@ -12,20 +13,27 @@ function formatBytes(x) {
 }
 
 module.exports = (req, res) => {
-    let folderPath = path.join(__dirname, '../../..', process.env.FILE_FOLDER || 'public/files')
-    if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, { recursive: true })
-    let fileList = []
+    try {
+        let folderPath = path.join(__dirname, '../../..', process.env.FILE_FOLDER || 'public/files')
+        if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, { recursive: true })
+        let fileList = []
 
-    fs.readdirSync(folderPath).forEach((fileName) => {
-        fileList.push({
-            fileName,
-            fileSize: formatBytes(fs.statSync(path.join(folderPath, fileName)).size)
+        fs.readdirSync(folderPath).forEach((fileName) => {
+            fileList.push({
+                fileName,
+                fileSize: formatBytes(fs.statSync(path.join(folderPath, fileName)).size)
+            })
         })
-    })
 
-    return res.status(200).json({
-        status: 'OK',
-        message: `Total ${fileList.length} files`,
-        data: fileList
-    })
+        return res.status(200).json({
+            status: 'OK',
+            message: `Total ${fileList.length} files`,
+            data: fileList
+        })
+    } catch (e) {
+        return res.status(500).json({
+            status: 'ERROR',
+            message: `Server error`
+        })
+    }
 }
