@@ -8,7 +8,7 @@ module.exports = (req, res) => {
             'message': 'GET request success'
         })
     } catch (e) {
-        logger.error(`/api/demo/get > ${e}`)
+        logger.error(new Error(e.stack).stack)
         return res.status(500).json({
             'status': 'ERROR',
             'message': 'Server error'

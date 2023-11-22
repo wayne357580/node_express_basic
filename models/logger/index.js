@@ -17,10 +17,10 @@ const loggerConfig = {
     level: process.env.LOG_LEVEL || 'info',
     format: combine(
         errors({ stack: true }),
-        //colorize({ all: true }),
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SS' }),
+        printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`),
         align(),
-        printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`)
+        colorize({ all: true })
     ),
     transports: [new transports.Console(), fileRotateTransport]
 }

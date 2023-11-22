@@ -42,7 +42,7 @@ module.exports = (app) => {
     });
     // Handle error
     app.use((err, req, res, next) => {
-        logger.error(err.stack)
+        logger.error(new Error(err.stack).stack)
         return res.status(500).send('Server error');
     });
 }

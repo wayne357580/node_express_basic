@@ -17,8 +17,8 @@ router.post('/', (req, res, next) => {
                 status: 'ERROR',
                 message: `Invalid file`
             })
-        } else if (err) {
-            logger.error(err)
+        } else if (e) {
+            logger.error(new Error(e.stack).stack)
             return res.status(500).json({
                 status: 'ERROR',
                 message: 'Server error'
@@ -37,8 +37,8 @@ router.post('/single', (req, res, next) => {
                 status: 'ERROR',
                 message: 'Invalid file [max 1] or wrong form field [file]'
             })
-        } else if (err) {
-            logger.error(err)
+        } else if (e) {
+            logger.error(new Error(e.stack).stack)
             return res.status(500).json({
                 status: 'ERROR',
                 message: 'Server error'
@@ -57,8 +57,8 @@ router.post('/multiple', (req, res, next) => {
                 status: 'ERROR',
                 message: `Invalid file [max ${fileLimit}] or wrong form field [file]`
             })
-        } else if (err) {
-            logger.error(err)
+        } else if (e) {
+            logger.error(new Error(e.stack).stack)
             return res.status(500).json({
                 status: 'ERROR',
                 message: 'Server error'
@@ -76,8 +76,8 @@ router.post('/text', (req, res, next) => {
                 status: 'ERROR',
                 message: `Invalid text form`
             })
-        } else if (err) {
-            logger.error(err)
+        } else if (e) {
+            logger.error(new Error(e.stack).stack)
             return res.status(500).json({
                 status: 'ERROR',
                 message: 'Server error'
