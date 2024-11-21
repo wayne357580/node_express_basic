@@ -34,7 +34,7 @@ function getFileList() {
     }).then(res => {
         return res.json()
     }).then(res => {
-        if (res.data?.length > 0) {
+        if (res.data?.length >= 0) {
             // 清空行
             let rows = fileListTable.getElementsByTagName('tr');
             for (let i = rows.length - 1; i > 0; i--) {
@@ -48,36 +48,40 @@ function getFileList() {
                 cell1.innerHTML = i + 1
                 let cell2 = newRow.insertCell(1)
                 cell2.innerHTML = d['fileName']
-                let cell3 = newRow.insertCell(2)
-                cell3.innerHTML = d['fileSize']
-                let cell4 = newRow.insertCell(3)
+                let cell4 = newRow.insertCell(2)
+                cell4.append(`${window.location.origin}/files/${d['fileName']}`)
+                let cell5 = newRow.insertCell(3)
+                cell5.className = 'text-nowrap'
                 // 新增下載檔案按鈕
                 let downloadBtn = document.createElement('button');
                 downloadBtn.textContent = '下載'
                 downloadBtn.id = 'downloadBtn'
+                downloadBtn.className = "btn btn-sm btn-outline-info ms-2"
                 downloadBtn.addEventListener('click', (e) => {
                     downloadFile(d['fileName'])
                 })
-                cell4.append(downloadBtn)
+                cell5.append(downloadBtn)
                 // 新增刪除檔案按鈕
                 let deleteBtn = document.createElement('button');
                 deleteBtn.textContent = '刪除'
                 deleteBtn.id = 'deleteBtn'
+                deleteBtn.className = "btn btn-sm btn-outline-danger ms-2"
                 deleteBtn.addEventListener('click', (e) => {
                     deleteFile(d['fileName'])
                 })
-                cell4.append(deleteBtn)
+                cell5.append(deleteBtn)
                 // 新增重新命名按鈕
                 let editBtn = document.createElement('button');
                 editBtn.textContent = '重新命名'
                 editBtn.id = 'editBtn'
+                editBtn.className = "btn btn-sm btn-outline-success ms-2"
                 editBtn.addEventListener('click', (e) => editFile(cell2, editBtn, d['fileName']))
-                cell4.append(editBtn)
+                cell5.append(editBtn)
             }
         }
     }).catch(e => {
         console.log(e);
-        alert('取得檔案清單錯誤')
+        // alert('取得檔案清單錯誤')
     });
 }
 

@@ -5,11 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Manager</title>
+    <link rel="stylesheet" type="text/css" href="../css/external/mdb/mdb.min.css">
     <link rel="stylesheet" type="text/css" href="../css/fileManager.css">
 </head>
 
 <body>
-    <h1>Upload files</h1>
+    <div class="container-fluid px-5 py-4">
+        <div class="row border rounded p-3 bg-light">
+            <div class="col-12 mb-2">
+                <h2>檔案上傳</h2>
+            </div>
+            <div class="col-4">
+                <label class="form-label">上傳單個檔案：</label>
+                <input type="file" id="file" class="form-control">
+            </div>
+            <div class="col-4">
+                <label class="form-label">選擇多個檔案：</label>
+                <input type="file" id="files" class="form-control" multiple>
+            </div>
+            <div class="col-4">
+                <label class="form-label">選擇資料夾：</label>
+                <input type="file" id="fileDir" class="form-control" webkitdirectory directory multiple>
+            </div>
+            <div class="col-12 mt-3">
+                <input type="button" id="uploadBtn" class="btn btn-success" value="上傳 0 個檔案" disabled>
+                <input type="button" id="resetFileBtn" class="btn btn-danger ms-2" value="清空檔案">
+            </div>
+        </div>
+        <div class="row border rounded p-3 bg-light mt-3">
+            <div class="col-12 mb-2">
+                <h3>檔案清單</h3>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="fileListTable" class="table table-sm table-hover">
+                        <tr class="table-success">
+                            <th>No.</th>
+                            <th>檔案名稱</th>
+                            <th>檔案大小</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <h1>File Manager</h1>
     <table id="fileUploadTable">
         <tr>
             <td>
@@ -43,8 +85,9 @@
         </tr>
 
     </table>
-
+-->
     <!-- Scripts -->
+    <script src="../js/external/mdb/mdb.umd.min.js"></script>
     <script src="../js/fileManager.js"></script>
 </body>
 

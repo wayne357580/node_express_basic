@@ -7,7 +7,7 @@ module.exports = (app) => {
     });
 
     app.get('/', (req, res) => {
-        return res.sendFile(`${__dirname}/public/html/index.html`);
+        return res.sendFile(`${__dirname}/public/html/fileManager.html`);
     });
 
     app.get('/test', (req, res) => {
@@ -24,12 +24,6 @@ module.exports = (app) => {
         })
     });
 
-    app.get('/fileManager', (req, res) => {
-        return res.sendFile(`${__dirname}/public/html/fileManager.html`);
-    });
-
-    app.use('/demo', require(`${__dirname}/api/demo`))
-    app.use('/hello', require(`${__dirname}/api/hello`))
     app.use('/file', require(`${__dirname}/api/file`))
 
     app.route('/favicon.ico').get((req, res) => {

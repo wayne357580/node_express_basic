@@ -1,10 +1,12 @@
 const { logger } = require(`../../../models/logger`)
+const sanitize = require("sanitize-filename");
 const fs = require('fs')
 const path = require('path')
 
 module.exports = (req, res) => {
     try {
-        const { fileName } = req.params
+        let { fileName } = req.params
+        fileName = sanitize(fileName)
         if (!fileName) {
             return res.status(400).json({
                 status: 'ERROR',

@@ -17,8 +17,13 @@ router.post('/', (req, res, next) => {
                 status: 'ERROR',
                 message: `Invalid file`
             })
-        } else if (e) {
-            logger.error(new Error(e.stack).stack)
+        } else if (typeof (err) === 'string') {
+            return res.status(400).json({
+                status: 'ERROR',
+                message: err
+            })
+        } else if (err) {
+            logger.error(new Error(err.stack).stack)
             return res.status(500).json({
                 status: 'ERROR',
                 message: 'Server error'
